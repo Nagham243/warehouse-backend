@@ -186,6 +186,7 @@ CORS_ALLOW_HEADERS = [
     'user-agent',
     'x-csrftoken', 
     'x-requested-with',
+    ‘x-csrf-token’
 ]
 
 SESSION_COOKIE_AGE = 86400  # 24 hours in seconds
