@@ -199,7 +199,7 @@ if DEBUG:
 else:
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
-    SESSION_COOKIE_SAMESITE = 'Lax'
+    SESSION_COOKIE_SAMESITE = 'None'
 
 # CSRF settings
 CSRF_COOKIE_HTTPONLY = False  # Allows JavaScript access for your CSRF handling
