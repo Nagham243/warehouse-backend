@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Users{% endblock %}
+{% block header_title %}Users{% endblock %}
+
+{% block content %}
+<!-- Stats Cards -->
+<div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 mb-8">
+    {% include "components/stat_card.html" with name="Total Users" icon="users" value=total_users color="#6366F1" %}
+    {% include "components/stat_card.html" with name="New Users Today" icon="user-plus" value=new_users_today color="#10B981" %}
+    {% include "components/stat_card.html" with name="Active Users" icon="user-check" value=active_users color="#F59E0B" %}
+    {% include "components/stat_card.html" with name="Churn Rate" icon="user-x" value=churn_rate color="#EF4444" %}
+</div>
+
+<!-- Users Table -->
+{% include "users/user_table.html" with users=users %}
+
+<!-- User Charts -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
+    {% include "users/user_growth.html" with growth_data=user_growth_data %}
+    {% include "users/user_activity.html" with activity_data=user_activity_data %}
+    {% include "users/user_demographics.html" with demographics_data=user_demographics_data %}
+</div>
+{% endblock %}

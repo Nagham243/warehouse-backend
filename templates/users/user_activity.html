@@ -1,0 +1,99 @@
+<div class="bg-gray-300 bg-opacity-50 backdrop-blur-md shadow-lg rounded-xl p-6 border border-gray-300">
+    <h2 class="text-xl font-semibold text-black mb-4">User Activity Heatmap</h2>
+    <div style="width: 100%; height: 300px;">
+        <canvas id="userActivityChart"></canvas>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const ctx = document.getElementById('userActivityChart').getContext('2d');
+
+        const activityData = {{ activity_data|safe }};
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: activityData.map(item => item.name),
+                datasets: [
+                    {
+                        label: '0-4',
+                        data: activityData.map(item => item['0-4']),
+                        backgroundColor: '#6366F1',
+                        stack: 'Stack 0'
+                    },
+                    {
+                        label: '4-8',
+                        data: activityData.map(item => item['4-8']),
+                        backgroundColor: '#8B5CF6',
+                        stack: 'Stack 0'
+                    },
+                    {
+                        label: '8-12',
+                        data: activityData.map(item => item['8-12']),
+                        backgroundColor: '#EC4899',
+                        stack: 'Stack 0'
+                    },
+                    {
+                        label: '12-16',
+                        data: activityData.map(item => item['12-16']),
+                        backgroundColor: '#10B981',
+                        stack: 'Stack 0'
+                    },
+                    {
+                        label: '16-20',
+                        data: activityData.map(item => item['16-20']),
+                        backgroundColor: '#F59E0B',
+                        stack: 'Stack 0'
+                    },
+                    {
+                        label: '20-24',
+                        data: activityData.map(item => item['20-24']),
+                        backgroundColor: '#3B82F6',
+                        stack: 'Stack 0'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        stacked: true,
+                        beginAtZero: true,
+                        grid: {
+                            color: '#374151'
+                        },
+                        ticks: {
+                            color: 'black'
+                        }
+                    },
+                    x: {
+                        stacked: true,
+                        grid: {
+                            color: '#374151'
+                        },
+                        ticks: {
+                            color: 'black'
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        backgroundColor: 'rgba(31, 41, 55, 0.8)',
+                        titleColor: '#E5E7EB',
+                        bodyColor: '#E5E7EB',
+                        borderColor: '#4B5563',
+                        borderWidth: 1
+                    },
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            color: 'black'
+                        }
+                    }
+                }
+            }
+        });
+    });
+</script>

@@ -1,0 +1,68 @@
+
+html[dir="rtl"] .space-x-2 > * + * {
+    margin-right: 0.5rem;
+    margin-left: 0;
+  }
+  
+  html[dir="ltr"] .space-x-2 > * + * {
+    margin-left: 0.5rem;
+    margin-right: 0;
+  }
+  
+  html[dir="rtl"] {
+    font-family: 'Tajawal', sans-serif; 
+  }
+  
+  html[dir="rtl"] .text-left {
+    text-align: right;
+  }
+  
+  html[dir="rtl"] .text-right {
+    text-align: left;
+  }
+  
+  .rtl-flip {
+    transform: scaleX(1);
+  }
+  
+  html[dir="rtl"] .rtl-flip {
+    transform: scaleX(-1);
+  }
+
+/* RTL Layout Adjustments */
+.rtl {
+  direction: rtl;
+}
+
+.rtl .rtl-flip {
+  transform: scaleX(-1);
+}
+
+.rtl-grid > * {
+  direction: ltr; /* Keep content direction consistent */
+}
+
+/* Adjust margins for RTL */
+.rtl .mr-2 {
+  margin-right: 0 !important;
+  margin-left: 0.5rem !important;
+}
+
+.rtl .ml-2 {
+  margin-left: 0 !important;
+  margin-right: 0.5rem !important;
+}
+
+/* Text alignment adjustments */
+.rtl .text-left {
+  text-align: right;
+}
+
+.rtl .text-right {
+  text-align: left;
+}
+
+/* Chart container adjustments */
+.rtl .chart-container {
+  direction: ltr; /* Keep charts LTR even in RTL mode */
+}

@@ -1,0 +1,69 @@
+<div class="bg-gray-300 bg-opacity-50 backdrop-blur-md shadow-lg rounded-xl p-6 border border-gray-300">
+    <h2 class="text-xl font-semibold text-black mb-4">User Growth</h2>
+    <div class="h-[320px]">
+        <canvas id="userGrowthChart"></canvas>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const ctx = document.getElementById('userGrowthChart').getContext('2d');
+
+        const growthData = {{ growth_data|safe }};
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: growthData.map(item => item.month),
+                datasets: [{
+                    label: 'Users',
+                    data: growthData.map(item => item.users),
+                    borderColor: '#8B5CF6',
+                    backgroundColor: 'rgba(139, 92, 246, 0.2)',
+                    borderWidth: 2,
+                    pointRadius: 4,
+                    pointBackgroundColor: '#8B5CF6',
+                    pointBorderWidth: 2,
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: '#374151'
+                        },
+                        ticks: {
+                            color: 'black'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            color: '#374151'
+                        },
+                        ticks: {
+                            color: 'black'
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        backgroundColor: 'rgba(31, 41, 55, 0.8)',
+                        titleColor: '#E5E7EB',
+                        bodyColor: '#E5E7EB',
+                        borderColor: '#4B5563',
+                        borderWidth: 1
+                    },
+                    legend: {
+                        labels: {
+                            color: 'black'
+                        }
+                    }
+                }
+            }
+        });
+    });
+</script>
