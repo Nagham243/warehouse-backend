@@ -192,11 +192,15 @@ CORS_ALLOW_HEADERS = [
 SESSION_COOKIE_AGE = 86400  # 24 hours in seconds
 SESSION_COOKIE_HTTPONLY = True  # Prevents JavaScript access
 
-# Only use these in production with HTTPS
-if not DEBUG:
-    SESSION_COOKIE_SECURE = True  # Use only with HTTPS
-    SESSION_COOKIE_SAMESITE = 'Lax'  # Prevents CSRF in modern browsers
-    CSRF_COOKIE_SECURE = True  # Use only with HTTPS
+# For development only - allow HTTP for cookies
+if DEBUG:
+    SESSION_COOKIE_SECURE = False
+    CSRF_COOKIE_SECURE = False
+    SESSION_COOKIE_SAMESITE = 'Lax'
+else:
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SESSION_COOKIE_SAMESITE = 'Lax'
 
 # CSRF settings
 CSRF_COOKIE_HTTPONLY = False  # Allows JavaScript access for your CSRF handling
