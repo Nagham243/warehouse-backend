@@ -187,7 +187,14 @@ CORS_ALLOW_HEADERS = [
     'x-requested-with',
     'x-csrf-token',
 ]
-
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',  
+    'POST',
+    'PUT',
+]
 SESSION_COOKIE_AGE = 86400  # 24 hours in seconds
 SESSION_COOKIE_HTTPONLY = True  # Prevents JavaScript access
 
