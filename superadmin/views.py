@@ -1193,11 +1193,13 @@ class CommissionManagementViewSet(viewsets.ModelViewSet):
 
     def perform_update(self, serializer):
         """Update the updated_by field"""
-        print(f"User: {request.user}")
-        print(f"User permissions: {request.user.get_all_permissions()}")
-        print(f"Request data: {request.data}")
-        return super().update(request, *args, **kwargs)
         try:
+            # Optional: Add debugging info (using self.request instead of request)
+            print(f"User: {self.request.user}")
+            print(f"User permissions: {self.request.user.get_all_permissions()}")
+            print(f"Request data: {self.request.data}")
+            
+            # Save the serializer with updated_by field
             serializer.save(updated_by=self.request.user)
         except Exception as e:
             logger.error(f"Error in perform_update: {str(e)}")
