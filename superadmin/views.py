@@ -1064,49 +1064,6 @@ class CommissionManagementViewSet(viewsets.ModelViewSet):
     ordering_fields = ['created_at', 'updated_at', 'percentage', 'name']
     ordering = ['-created_at']
 
-    def get_permissions(self):
-        """
-        Only superadmins and financial managers can manage commissions
-        """
-        return [permissions.IsAuthenticated()]
-
-    def check_permissions(self, request):
-        """
-        Check if user has superadmin or financial user type permissions
-        """
-        try:
-            super().check_permissions(request)
-            user = request.user
-
-            is_superadmin = False
-            is_financial = False
-
-            if hasattr(user, 'is_superadmin'):
-                is_superadmin = user.is_superadmin
-            elif hasattr(user, 'user_type'):
-                is_superadmin = user.user_type == 'superadmin'
-
-            if hasattr(user, 'is_financial'):
-                is_financial = user.is_financial
-            elif hasattr(user, 'user_type'):
-                is_financial = user.user_type == 'financial'
-
-            if not (is_superadmin or is_financial):
-                if user.is_staff or user.is_superuser:
-                    return True
-
-                self.permission_denied(
-                    request,
-                    message="You do not have permission to manage commissions."
-                )
-
-        except Exception as e:
-            logger.error(f"Permission check error: {str(e)}")
-            self.permission_denied(
-                request,
-                message="Permission check failed. Please contact support."
-            )
-
     def get_serializer_class(self):
         """
         Return appropriate serializer based on action and commission_type
